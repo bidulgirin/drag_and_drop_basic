@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>드래그앤드랍_기본편</title>
+</head>
+<style>
+    .drag_box {
+        border: 1px solid black;
+        width: 300px;
+        height: 300px;
+    }
+</style>
+
+<body>
+    <div class="dragAndDrop">
+        <div id="div1" class="drag_box" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="drag_box" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <img id="drag1"
+                src="https://images.prismic.io/wisdom/0a6a78d8-65fa-47b7-98ce-7b5905faeeaf_alicia-gauthier-KJDhTtPCveI-unsplash.jpg"
+                draggable="true" ondragstart="drag(event)" width="336">
+        </div>
+        <pre>
+        [drag and drop 과 관련된 요소 알아보기]
+        1. ondrop : 드래그한 요소를 놓았을 때 발생하는 이벤트
+        2. ondragover : 요소 위에서 드래그 중일 때 계속 발생하는 이벤트.
+        3. draggable : 요소를 드래그할 수 있도록 설정하는 HTML 속성.
+        4. ondragstart : 요소를 드래그하기 시작할 때 발생하는 이벤트.
+
+        [ dataTransfer 이 뭘까? ]
+        dataTransfer 객체는 드래그 앤 드롭 이벤트에서 
+        데이터(텍스트, 파일, URL 등)를 저장하고 전달하는 데 사용됨
+        주로 dragstart와 drop 이벤트에서 데이터를 주고받을 때 활용
+       </pre>
+
+    </div>
+</body>
+<script>
+    // drag and drop api 를 사용하기전 기본 드래그 드랍은 어떻게 동작하는지 알아보자
+
+    // 드랍을 허용합니다
+    function allowDrop(ev) {
+        ev.preventDefault(); // 기본 동작 방지 (브라우저에서 기본적으로 요소 위로 드래그하면 드롭(drop)이 허용되지 않는 기본 동작이 있음)
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+
+        console.log("<drag> ev.target:", ev.target);
+        console.log("drag 이벤트 발생!", `${ev.target.id}로 text 속성의 값이 setting 되었습니다`);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+
+        console.log("<drop>ev :", ev);
+        console.log("<drop>ev.target :", ev.target);
+        console.log("drop 이벤트 발생!", `${data}가 ${ev.target}의 속하게 되었습니다.`);
+    }
+</script>
+
+</html>

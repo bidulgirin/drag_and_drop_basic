@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>드래그앤드랍_리펙터버전</title>
+    <link rel="stylesheet" href="./style/drag_and_drop.css">
+    <script defer src="./script/drag_and_drop.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <div class="drag_box"></div>
+        <div class="drag_box">
+            <!-- 드래그 할 아이템 -->
+            <img id="drag1" class="dragging_item"
+                src="https://images.prismic.io/wisdom/0a6a78d8-65fa-47b7-98ce-7b5905faeeaf_alicia-gauthier-KJDhTtPCveI-unsplash.jpg"
+                draggable="true" width="336">
+        </div>
+
+        <pre>
+기본편과 차이점 : 
+
+1. 돔에 직접 on~ 함수를 하지 않고 addEventListener 를 사용함
+on~ 함수를 사용하면 기존 핸들러를 덮어버릴수있음
+여러개의 핸들러를 추가할때도 편안함! 되도록이면 addEventListner를 사용하자
+
+2. 이벤트 위임 : 개별적으로 이벤트를 추가하지 않으므로 메모리 사용량 절약 + 성능 향상!
+        </pre>
+    </div>
+</body>
+
+</html>
